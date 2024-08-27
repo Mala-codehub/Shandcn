@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
+import TextareaDemo from './TextareaDemo';
 
 function App() {
+  const [content, setContent] = useState('');
+
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar onSelect={setContent} />
+      <div className="flex flex-grow items-center justify-center font-bold boder-white m-6">
+      <TextareaDemo content={content} /></div>
     </div>
   );
 }

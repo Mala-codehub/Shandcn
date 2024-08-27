@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
 
-const Sidebar = () => {
-  const [selectedItem, setSelectedItem] = useState(''); 
-  
-  const renderContent = () => {
-    switch (selectedItem) {
+const Sidebar = ({ onSelect }) => {
+  const [selectedItem, setSelectedItem] = useState('');
+
+  const renderContent = (item) => {
+    switch (item) {
       case 'Text':
-        return <div>Details about Text edit...</div>;
+        return 'Details about Text edit...';
       case 'Button':
-        return <div>Details about Button edit...</div>;
+        return 'Details about Button edit...';
       case 'Space':
-        return <div>Details about Space edit...</div>;
+        return 'Details about Space edit...';
       case 'About':
-        return <div>Details about About edit...</div>;
+        return 'Details about About edit...';
       case 'Image':
-        return <div>Details about Image edit...</div>;
+        return 'Details about Image edit...';
       case 'Video':
-        return <div>Details about Video edit...</div>;
+        return 'Details about Video edit...';
       default:
-        return <div>Select an item to view details</div>;
+        return 'Select an item to view details';
     }
+  };
+
+  const handleClick = (item) => {
+    setSelectedItem(item);
+    onSelect(renderContent(item));
   };
 
   return (
@@ -50,8 +55,8 @@ const Sidebar = () => {
           <div className="flex flex-col">
             <ul>
               <li className="rounded-sm">
-                <button
-                  onClick={() => setSelectedItem('Text')}
+                <Button
+                  onClick={() => handleClick('Text')}
                   className="flex items-center px-8 py-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
                 >
                   <span>
@@ -60,15 +65,15 @@ const Sidebar = () => {
                     </svg>
                     Text
                   </span>
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
           <div className="flex flex-col">
             <ul>
               <li className="rounded-sm">
-                <button
-                  onClick={() => setSelectedItem('Button')}
+                <Button
+                  onClick={() => handleClick('Button')}
                   className="flex items-center p-5 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
                 >
                   <span>
@@ -77,15 +82,15 @@ const Sidebar = () => {
                     </svg>
                     Button
                   </span>
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
           <div className="flex flex-col">
             <ul>
               <li className="rounded-sm">
-                <button
-                  onClick={() => setSelectedItem('Space')}
+                <Button
+                  onClick={() => handleClick('Space')}
                   className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
                 >
                   <span>
@@ -94,15 +99,15 @@ const Sidebar = () => {
                     </svg>
                     Space
                   </span>
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
           <div className="flex flex-col">
             <ul>
               <li className="rounded-sm">
-                <button
-                  onClick={() => setSelectedItem('About')}
+                <Button
+                  onClick={() => handleClick('About')}
                   className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
                 >
                   <span>
@@ -111,15 +116,15 @@ const Sidebar = () => {
                     </svg>
                     About
                   </span>
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
           <div className="flex flex-col">
             <ul>
               <li className="rounded-sm">
-                <button
-                  onClick={() => setSelectedItem('Image')}
+                <Button
+                  onClick={() => handleClick('Image')}
                   className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
                 >
                   <span>
@@ -128,15 +133,15 @@ const Sidebar = () => {
                     </svg>
                     Image
                   </span>
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
           <div className="flex flex-col">
             <ul>
               <li className="rounded-sm">
-                <button
-                  onClick={() => setSelectedItem('Video')}
+                <Button
+                  onClick={() => handleClick('Video')}
                   className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
                 >
                   <span>
@@ -145,15 +150,12 @@ const Sidebar = () => {
                     </svg>
                     Video
                   </span>
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      </div>
-      <div className="flex-grow flex items-center justify-center p-6 font-bold bg-white">
-        {renderContent()}
       </div>
     </div>
     
