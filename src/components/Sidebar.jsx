@@ -1,164 +1,118 @@
 import React, { useState } from 'react';
-import { Button } from './ui/button';
+import TextareaDemo from '@/TextareaDemo';
+import InputDemo from '@/InputDemo';
+import SelectDemo from '@/SelectDemo';
+import InputDemo1 from '@/InputDemo1'; // Make sure this import is correct
+import SeparatorDemo from '@/SeparatorDemo';
 
-const Sidebar = ({ onSelect }) => {
-  const [selectedItem, setSelectedItem] = useState('');
-
-  const renderContent = (item) => {
-    switch (item) {
-      case 'Text':
-        return 'Details about Text edit...';
-      case 'Button':
-        return 'Details about Button edit...';
-      case 'Space':
-        return 'Details about Space edit...';
-      case 'About':
-        return 'Details about About edit...';
-      case 'Image':
-        return 'Details about Image edit...';
-      case 'Video':
-        return 'Details about Video edit...';
-      default:
-        return 'Select an item to view details';
-    }
-  };
-
-  const handleClick = (item) => {
-    setSelectedItem(item);
-    onSelect(renderContent(item));
-  };
+const Sidebar = () => {
+  const [activeTab, setActiveTab] = useState('content');
 
   return (
     <div className="flex h-screen">
-    <div className="flex flex-col bg-gray-200 w-60">
-      <div className="flex items-center gap-4 bg-red-500 p-2 mt-4">
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          strokeWidth="1.5" 
-          stroke="white" 
-          className="w-6 h-6"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" 
-          />
-        </svg>
-        <h3 className="italic text-white font-bold">elementor</h3>
-      </div>
-      
-      {/* Centered Grid Container */}
-      <div className="flex-grow flex items-center justify-center">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col">
-            <ul>
-              <li className="rounded-sm">
-                <Button
-                  onClick={() => handleClick('Text')}
-                  className="flex items-center px-8 py-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
-                >
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                    </svg>
-                    Text
-                  </span>
-                </Button>
-              </li>
-            </ul>
+      {/* Sidebar Container */}
+      <div className="flex flex-col bg-gray-200 w-60">
+        {/* Header */}
+        <div className="flex items-center gap-4 bg-red-500 p-2 mt-4">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            strokeWidth="1.5" 
+            stroke="white" 
+            className="w-6 h-6"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" 
+            />
+          </svg>
+          <h3 className="italic text-white font-bold">elementor</h3>
+        </div>
+        
+        {/* Tabs and Content Container */}
+        <div className="flex flex-col bg-white border-r shadow-md p-4">
+          {/* Tab Headers */}
+          <div className="flex justify-around border-b mb-4">
+            <button 
+              className={`p-2 ${activeTab === 'content' ? 'border-b-2 border-red-500' : ''}`}
+              onClick={() => setActiveTab('content')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                <path fillRule="evenodd" d="M11.013 2.513a1.75 1.75 0 0 1 2.475 2.474L6.226 12.25a2.751 2.751 0 0 1-.892.596l-2.047.848a.75.75 0 0 1-.98-.98l.848-2.047a2.75 2.75 0 0 1 .596-.892l7.262-7.261Z" clipRule="evenodd" />
+              </svg>
+              Content
+            </button>
+            <button 
+              className={`p-2 ${activeTab === 'style' ? 'border-b-2 border-red-500' : ''}`}
+              onClick={() => setActiveTab('style')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                <path fillRule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0ZM8 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM5.5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm6 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clipRule="evenodd" />
+              </svg>
+              Style
+            </button>
+            <button 
+              className={`p-2 ${activeTab === 'advanced' ? 'border-b-2 border-red-500' : ''}`}
+              onClick={() => setActiveTab('advanced')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                <path fillRule="evenodd" d="M6.455 1.45A.5.5 0 0 1 6.952 1h2.096a.5.5 0 0 1 .497.45l.186 1.858a4.996 4.996 0 0 1 1.466.848l1.703-.769a.5.5 0 0 1 .639.206l1.047 1.814a.5.5 0 0 1-.14.656l-1.517 1.09a5.026 5.026 0 0 1 0 1.694l1.516 1.09a.5.5 0 0 1 .141.656l-1.047 1.814a.5.5 0 0 1-.639.206l-1.703-.768c-.433.36-.928.649-1.466.847l-.186 1.858a.5.5 0 0 1-.497.45H6.952a.5.5 0 0 1-.497-.45l-.186-1.858a4.993 4.993 0 0 1-1.466-.848l-1.703.769a.5.5 0 0 1-.639-.206l-1.047-1.814a.5.5 0 0 1 .14-.656l1.517-1.09a5.033 5.033 0 0 1 0-1.694l-1.516-1.09a.5.5 0 0 1-.141-.656L2.46 3.593a.5.5 0 0 1 .639-.206l1.703.769c.433-.36.928-.65 1.466-.848l.186-1.858Zm-.177 7.567-.022-.037a2 2 0 0 1 3.466-1.997l.022.037a2 2 0 0 1-3.466 1.997Z" clipRule="evenodd" />
+              </svg>
+              Advanced
+            </button>
           </div>
-          <div className="flex flex-col">
-            <ul>
-              <li className="rounded-sm">
-                <Button
-                  onClick={() => handleClick('Button')}
-                  className="flex items-center p-5 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
-                >
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z" />
-                    </svg>
-                    Button
-                  </span>
-                </Button>
-              </li>
-            </ul>
+          
+          {/* Tab Content */}
+          {activeTab === 'content' && (
+            <div>
+              <h3 className="font-bold mb-2">Title</h3>
+              <TextareaDemo />
+              
+              {/* Additional content for 'Content' tab */}
+              <div className="flex flex-col space-y-2">
+                <h3>Links</h3>
+                <InputDemo />
+                <div className="flex flex-row gap-2">
+                  <h3>Size</h3>
+                  <select className="border p-2 w-32">
+                    <option>Default</option>
+                    {/* Other options */}
+                  </select>
+                </div>
+                <div className="flex flex-row gap-2">
+                  <h3>HTML Tag</h3>
+                  <select className="border p-2 w-32">
+                    <option>H2</option>
+                    {/* Other options */}
+                  </select>
+                </div>
+              </div>
+              {/* Adding InputDemo1 to the sidebar */}
+          <div className="flex flex-row mt-4 items-center">
+            <h3 className="mr-1">Alignment</h3>
+            <InputDemo1 />
           </div>
-          <div className="flex flex-col">
-            <ul>
-              <li className="rounded-sm">
-                <Button
-                  onClick={() => handleClick('Space')}
-                  className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
-                >
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                    Space
-                  </span>
-                </Button>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col">
-            <ul>
-              <li className="rounded-sm">
-                <Button
-                  onClick={() => handleClick('About')}
-                  className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
-                >
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h17.25" />
-                    </svg>
-                    About
-                  </span>
-                </Button>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col">
-            <ul>
-              <li className="rounded-sm">
-                <Button
-                  onClick={() => handleClick('Image')}
-                  className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
-                >
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a.375.375 0 1 0 0-.75.375.375 0 0 0 0 .75ZM2.625 4.875C2.625 3.839 3.464 3 4.5 3h15c1.036 0 1.875.839 1.875 1.875v14.25c0 1.036-.839 1.875-1.875 1.875h-15c-1.036 0-1.875-.839-1.875-1.875V4.875Zm4.874 7.313-2.625 3.4a.375.375 0 0 0 .3.612h14.252a.375.375 0 0 0 .299-.612l-4.875-6.3a.375.375 0 0 0-.598 0l-3.375 4.35-.927-1.237a.375.375 0 0 0-.598 0l-1.953 2.487a.375.375 0 0 1-.6 0Z" />
-                    </svg>
-                    Image
-                  </span>
-                </Button>
-              </li>
-            </ul>
-          </div>
-          <div className="flex flex-col">
-            <ul>
-              <li className="rounded-sm">
-                <Button
-                  onClick={() => handleClick('Video')}
-                  className="flex items-center p-6 rounded-md m-2 text-black font-bold bg-white hover:bg-red-300"
-                >
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.572c0-.955-1.074-1.526-1.855-.995l-9.015 5.678c-.713.449-.713 1.541 0 1.99l9.015 5.678c.781.531 1.855-.04 1.855-.994V15m0-6v6m0-6L21 5.25m-5.25 9 5.25 3.75M12 18.938a4.5 4.5 0 1 1-6-6.79" />
-                    </svg>
-                    Video
-                  </span>
-                </Button>
-              </li>
-            </ul>
-          </div>
+            </div>
+          )}
+          {activeTab === 'style' && (
+            <div>
+              {/* Content for the 'Style' tab */}
+              <h3 className="font-bold">Style Options</h3>
+              {/* Add style settings here */}
+            </div>
+          )}
+          {activeTab === 'advanced' && (
+            <div>
+              {/* Content for the 'Advanced' tab */}
+              <h3 className="font-bold">Advanced Settings</h3>
+              {/* Add advanced settings here */}
+            </div>
+          )}
         </div>
       </div>
-      </div>
     </div>
-    
   );
 };
 

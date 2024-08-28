@@ -8,8 +8,9 @@ function App() {
   return (
     <div className="flex">
       <Sidebar onSelect={setContent} />
-      <div className="flex flex-grow items-center justify-center font-bold boder-white m-6">
-      <TextareaDemo content={content} /></div>
+      <div className="flex flex-grow items-center justify-center font-bold border-white m-6">
+        <TextareaDemo content={content} />
+      </div>
     </div>
   );
 }
